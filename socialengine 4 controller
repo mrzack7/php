@@ -4,3 +4,28 @@ $select = $table->select()
   ->where('enabled = ?', 1)
   ->order('creation_date DESC')
   ;
+
+$this->view->paginator = $paginator = Zend_Paginator::factory($select);
+// Set item count per page and current page number
+$paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 4));
+$paginator->setCurrentPageNumber($this->_getParam('page', 1)); 
+
+// Do not render if nothing to show
+if( $paginator->getTotalItemCount() <= 0 ) {
+  return $this->setNoRender();
+}    
+
+-----------------------------------------------------------------------------------------------------------------
+// Get view
+$viewer = Engine_Api::_()->user()->getViewer();
+
+// Check viewer yourself
+$viewer->isSelf($user)
+$user là user get về muốn check với viewer
+VD: $user = Engine_Api::_()->getItem('user', $user_id)
+
+// check that user is already friends with the member
+$user->membership()->isMember($viewer)
+
+// check that user has not blocked the member
+$viewer->isBlocked($user)
