@@ -1,0 +1,6 @@
+$table = Engine_Api::_()->getDbtable('users', 'user');
+$select = $table->select()
+  ->where('search = ?', 1)
+  ->where('enabled = ?', 1)
+  ->order('creation_date DESC')
+  ;
